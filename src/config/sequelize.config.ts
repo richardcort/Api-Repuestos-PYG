@@ -37,5 +37,7 @@ const syncModels = async () => {
 syncModels()
 
 export {
-    db
+    db,
+    RoleDB,
+    UserBD,
 }
