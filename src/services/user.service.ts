@@ -1,7 +1,7 @@
 import { UserBD } from "../config"
 import { UserInterface } from "../interfaces"
 
-const UserServices = {
+const userServices = {
     getAll: async () => {
         try {
             const users = await UserBD.findAll()
@@ -97,7 +97,7 @@ const UserServices = {
                     user_id: id
                 }
             })
-            const { data } = await UserServices.getOne(id)
+            const { data } = await userServices.getOne(id)
 
             return {
                 message: "Successful upgrade",
@@ -176,5 +176,5 @@ const UserServices = {
 }
 
 export {
-    UserServices
+    userServices
 }
