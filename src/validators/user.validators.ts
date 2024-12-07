@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import { body } from "express-validator"
 
-import { userServices } from "../services"
+import { roleServices } from "../services"
 
 class UserValidator {
     public validateUSer = [
@@ -24,7 +24,7 @@ class UserValidator {
 
     public validateRolId = async (req: Request, res: Response, next: NextFunction) => {
         const { role_id } = req.body
-        const { message, status, data } = await userServices.getOne(Number(role_id))
+        const { message, status, data } = await roleServices.getOne(Number(role_id))
 
         if (status == 500) {
             return res.status(status).json({
