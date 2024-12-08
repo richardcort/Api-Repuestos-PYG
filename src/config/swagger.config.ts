@@ -15,8 +15,8 @@ const swaggerOptions = {
             },
         ],
     },
-    apis: ['./src/routes*.js'],
-    basePath: '/api'
+    basePath: '/api',
+    apis: ['src/routes/*.ts'],
 }
 
 export { swaggerOptions }
