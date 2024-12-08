@@ -14,7 +14,7 @@ export class Server {
 
     constructor() {
         this.app = express()
-        this.port = process.env.PORT || 3000
+        this.port = process.env.API_PORT || 3000
         this.pre = "/api"
         this.paths = {
             roles: this.pre + "/roles",
