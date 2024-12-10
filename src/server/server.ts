@@ -3,20 +3,22 @@ import express from "express"
 import swaggerJSDoc from "swagger-jsdoc"
 import swaggerUi from "swagger-ui-express"
 
+import { roleRoute, userRoute } from "../routes";
 import { db, swaggerOptions } from "../config"
 
 export class Server {
     private app: any
     private port: number | string
     private pre: string
-    private path: any
+    private paths: any
 
     constructor() {
         this.app = express()
-        this.port = process.env.PORT || 3000
+        this.port = process.env.API_PORT || 3000
         this.pre = "/api"
-        this.path = {
-
+        this.paths = {
+            roles: this.pre + "/roles",
+            users: this.pre + "/users"
         }
         this.connectDataBase()
         this.middlewares()
@@ -31,7 +33,8 @@ export class Server {
     }
 
     routes() {
-
+        this.app.use(this.paths.roles, roleRoute)
+        this.app.use(this.paths.users, userRoute)
     }
 
     async connectDataBase() {
