@@ -71,3 +71,7 @@ const companyServices = {
         }
     }
 }
+
+export {
+    companyServices
+}
