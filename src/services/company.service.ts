@@ -2,9 +2,18 @@ import { CompanyDB } from "../config/sequelize.config"
 import { CompanyInterface } from "../interfaces"
 
 const companyServices = {
-    getRecord: async () => {
+    getRecord: async (rif?: string) => {
         try {
-            const company = await CompanyDB.findAll()
+            let company
+            if (rif === undefined) {
+                company = await CompanyDB.findAll()
+            } else {
+                company = await CompanyDB.findAll({
+                    where: {
+                        rif: rif
+                    }
+                })
+            }
             if (company.length === 0) {
                 return {
                     message: "No record found",
