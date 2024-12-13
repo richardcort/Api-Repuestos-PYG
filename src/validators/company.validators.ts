@@ -31,6 +31,21 @@ class CompanyValidator {
         }
         next()
     }
+
+    public validateIfRifExist = async (req: Request, res: Response, next: NextFunction) => {
+        const { rif } = req.params
+        const { status, message } = await companyServices.getRecord(rif)
+        if (status === 500) {
+            return res.status(status).json({
+                message
+            })
+        } else if (status === 404) {
+            return res.status(status).json({
+                message
+            })
+        }
+        next()
+    }
 }
 
 export {
