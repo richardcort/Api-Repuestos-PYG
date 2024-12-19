@@ -1,5 +1,5 @@
 export interface BrandInterface {
-    brand_code?: number
+    brand_code: string
     name: string
     status?: boolean
     createdAt: Date
