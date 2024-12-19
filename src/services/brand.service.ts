@@ -153,7 +153,7 @@ const brandServices = {
             )
             return {
                 message: "Successful removal",
-                status: 204,
+                status: 200,
             }
         } catch (error) {
             console.log("Error in brandServices.delete: " + error)

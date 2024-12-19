@@ -1,5 +1,4 @@
 import { Router, Request, Response, NextFunction } from "express"
-
 import { validateFields } from "../middlewares"
 import { BrandController } from "../controllers"
 import { BrandValidator } from "../validators"
