@@ -117,7 +117,7 @@ const brandServices = {
     },
     update: async (dataRequest: Partial<BrandInterface>, code: string) => {
         dataRequest.name = dataRequest.name?.toLocaleLowerCase()
-        dataRequest.brand_code = dataRequest.brand_code?.toUpperCase()
+        delete dataRequest.brand_code
         try {
             await BrandDB.update(dataRequest, {
                 where: {
