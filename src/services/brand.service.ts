@@ -30,6 +30,7 @@ const brandServices = {
         }
     },
     getOne: async (brandCode: string) => {
+        brandCode = brandCode.toUpperCase()
         try {
             const brand = await BrandDB.findOne({
                 where: {
@@ -55,6 +56,39 @@ const brandServices = {
             }
         } catch (error) {
             console.log("Error in brandServices.getOne: " + error)
+            return {
+                message: "Contact the administrator: error",
+                status: 500
+            }
+        }
+    },
+    getOneByName: async (name: string) => {
+        name = name.toLowerCase()
+        try {
+            const brand = await BrandDB.findOne({
+                where: {
+                    name: name,
+                    status: true
+                }
+            })
+            if (!brand) {
+                return {
+                    message: "No record found",
+                    status: 404,
+                    data: {
+                        brand
+                    }
+                }
+            }
+            return {
+                message: "Record found",
+                status: 200,
+                data: {
+                    brand
+                }
+            }
+        } catch (error) {
+            console.log("Error in brandServices.getOneByName: " + error)
             return {
                 message: "Contact the administrator: error",
                 status: 500
