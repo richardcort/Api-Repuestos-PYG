@@ -22,7 +22,7 @@ class BrandValidator {
                     message
                 })
             } else if (status === 404) {
-                return res.status(409).json({
+                return res.status(status).json({
                     errors: [
                         {
                             type: "field",
