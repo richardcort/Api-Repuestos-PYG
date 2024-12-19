@@ -1,5 +1,4 @@
 import { Router, Request, Response, NextFunction } from "express"
-
 import { validateFields } from "../middlewares"
 import { CompanyController } from "../controllers"
 import { CompanyValidator } from "../validators"
@@ -19,7 +18,7 @@ router.get("/",
 router.post("/",
     companyValidator.validateCompany,
     (req: Request, res: Response, next: NextFunction) => {
-        companyValidator.companyAlreadyExists(req, res, next)
+        companyValidator.checkCompanyRegistered(req, res, next)
     },
     (req: Request, res: Response, next: NextFunction) => {
         validateFields(req, res, next)
@@ -33,7 +32,7 @@ router.post("/",
 router.put("/:rif",
     companyValidator.validateCompany,
     (req: Request, res: Response, next: NextFunction) => {
-        companyValidator.validateIfRifExist(req, res, next)
+        companyValidator.checkRifExists(req, res, next)
     },
     (req: Request, res: Response, next: NextFunction) => {
         validateFields(req, res, next)

@@ -57,6 +57,7 @@ const companyServices = {
         }
     },
     update: async (dataRequest: Partial<CompanyInterface>, rif: string) => {
+        delete dataRequest.rif
         try {
             await CompanyDB.update(dataRequest, {
                 where: {

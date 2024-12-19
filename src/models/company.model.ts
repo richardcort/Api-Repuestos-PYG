@@ -2,17 +2,17 @@ import { DataTypes } from "sequelize"
 
 const CompanyModel = {
     rif: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(10),
         allowNull: false,
         primaryKey: true
     },
     name: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(60),
         allowNull: false,
         unique: true
     },
     address: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.TEXT,
         allowNull: false
     }
 }
