@@ -5,14 +5,14 @@ import { companyServices } from "../services"
 class CompanyValidator {
     public validateCompany = [
         body("rif").notEmpty().withMessage("Rif is required"),
-        body("rif").isString().withMessage("Rif must be string"),
+        body("rif").isString().withMessage("Rif must be a string"),
         body("rif").isLength({ min: 10 }).withMessage("Rif must be 10 characters"),
         body("rif").matches(/^[VJEGP][0-9]{8}[0-9]$/).withMessage("Rif format is invalid. It must start with an uppercase letter followed by 8 digits and a check digit."),
         body("name").notEmpty().withMessage("Name is required"),
-        body("name").isString().withMessage("Name must be string"),
+        body("name").isString().withMessage("Name must be a string"),
         body("name").isLength({ min: 5, max: 60 }).withMessage("Name must be between 5 and 60 characters"),
         body("address").notEmpty().withMessage("Address is required"),
-        body("address").isString().withMessage("Address must be string")
+        body("address").isString().withMessage("Address must be a string")
     ]
 
     public async checkCompanyRegistered (req: Request, res: Response, next: NextFunction) {

@@ -3,6 +3,7 @@ import { Sequelize } from "sequelize"
 import {
     BrandModel,
     CategoryModel,
+    ClientModel,
     CompanyModel,
     RoleModel,
     UserModel
@@ -22,6 +23,7 @@ const db = new Sequelize(dbName, dbUser, dbPassword, {
 // create tables in alphabetical order
 const BrandDB = db.define("brands", BrandModel)
 const CategoryDB = db.define("categories", CategoryModel)
+const ClientDB = db.define("clients", ClientModel)
 const CompanyDB = db.define("companies", CompanyModel)
 const RoleDB = db.define("roles", RoleModel)
 const UserBD = db.define("users", UserModel)
@@ -45,6 +47,7 @@ syncModels()
 export {
     BrandDB,
     CategoryDB,
+    ClientDB,
     CompanyDB,
     db,
     RoleDB,
