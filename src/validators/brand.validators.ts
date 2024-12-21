@@ -5,10 +5,10 @@ import { brandServices } from "../services"
 class BrandValidator {
     public validateBrand = [
         body("brand_code").notEmpty().withMessage("Brand Code is required"),
-        body("brand_code").isString().withMessage("Brand Code must be string"),
+        body("brand_code").isString().withMessage("Brand Code must be a string"),
         body("brand_code").isLength({ min: 3, max: 10 }).withMessage("Brand Code must be between 3 and 10 characters"),
         body("name").notEmpty().withMessage("Name is required"),
-        body("name").isString().withMessage("Name must be string"),
+        body("name").isString().withMessage("Name must be a string"),
         body("name").isLength({ min: 3, max: 50 }).withMessage("Name must be between 3 and 50 characters"),
     ]
 

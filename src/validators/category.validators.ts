@@ -5,13 +5,13 @@ import { categoryServices } from "../services"
 class CategoryValidator {
     public validateCategory = [
         body("category_code").notEmpty().withMessage("Category Code is required"),
-        body("category_code").isString().withMessage("Category Code must be string"),
+        body("category_code").isString().withMessage("Category Code must be a string"),
         body("category_code").isLength({ min: 3, max: 10 }).withMessage("Category Code must be between 3 and 10 characters"),
         body("name").notEmpty().withMessage("Name is required"),
-        body("name").isString().withMessage("Name must be string"),
+        body("name").isString().withMessage("Name must be a string"),
         body("name").isLength({ min: 3, max: 50 }).withMessage("Name must be between 3 and 50 characters"),
         body("description").notEmpty().withMessage("The description is required"),
-        body("description").isString().withMessage("the description must be string"),
+        body("description").isString().withMessage("the description must be a string"),
     ]
 
     public async checkCategoryCode(req: Request, res: Response, next: NextFunction) {
