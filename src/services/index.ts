@@ -1,4 +1,5 @@
 export * from "./brand.service"
+export * from "./category.service"
 export * from "./company.service"
 export * from "./role.service"
 export * from "./user.service"
