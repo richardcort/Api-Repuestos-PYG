@@ -4,7 +4,8 @@ import swaggerJSDoc from "swagger-jsdoc"
 import swaggerUi from "swagger-ui-express"
 
 import {
-    brandRouter,
+    brandRoute,
+    categoryRoute,
     companyRoute,
     roleRoute,
     userRoute
@@ -25,7 +26,8 @@ export class Server {
             roles: this.pre + "/roles",
             users: this.pre + "/users",
             company: this.pre + "/company",
-            brand: this.pre + "/brands",
+            brands: this.pre + "/brands",
+            categories: this.pre + "/categories"
         }
         this.connectDataBase()
         this.middlewares()
@@ -43,7 +45,8 @@ export class Server {
         this.app.use(this.paths.roles, roleRoute)
         this.app.use(this.paths.users, userRoute)
         this.app.use(this.paths.company, companyRoute)
-        this.app.use(this.paths.brand, brandRouter)
+        this.app.use(this.paths.brands, brandRoute)
+        this.app.use(this.paths.categories, categoryRoute)
     }
 
     async connectDataBase() {

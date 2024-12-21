@@ -1,16 +1,16 @@
-import { BrandDB } from "../config"
-import { BrandInterface } from "../interfaces"
+import { CategoryDB } from "../config"
+import { CategoryInterface } from "../interfaces"
 
-const brandServices = {
+const categoryServices = {
     getAll: async () => {
         try {
-            const brands = await BrandDB.findAll({ where: { status: true } })
-            if (brands.length === 0) {
+            const categories = await CategoryDB.findAll({ where: { status: true } })
+            if (categories.length === 0) {
                 return {
                     message: "No records found",
                     status: 404,
                     data: {
-                        brands
+                        categories
                     }
                 }
             }
@@ -18,11 +18,11 @@ const brandServices = {
                 message: "Records found",
                 status: 200,
                 data: {
-                    brands
+                    categories
                 }
             }
         } catch (error) {
-            console.log("Error in brandServices.getAll: " + error)
+            console.log("Error in categoryServices.getAll: " + error)
             return {
                 message: "Contact the administrator: error",
                 status: 500
@@ -32,18 +32,18 @@ const brandServices = {
     getOne: async (code: string) => {
         code = code.toUpperCase()
         try {
-            const brand = await BrandDB.findOne({
+            const category = await CategoryDB.findOne({
                 where: {
-                    brand_code: code,
+                    category_code: code,
                     status: true
                 }
             })
-            if (!brand) {
+            if (!category) {
                 return {
                     message: "No record found",
                     status: 404,
                     data: {
-                        brand
+                        category
                     }
                 }
             }
@@ -51,11 +51,11 @@ const brandServices = {
                 message: "Record found",
                 status: 200,
                 data: {
-                    brand
+                    category
                 }
             }
         } catch (error) {
-            console.log("Error in brandServices.getOne: " + error)
+            console.log("Error in categoryServices.getOne: " + error)
             return {
                 message: "Contact the administrator: error",
                 status: 500
@@ -65,18 +65,18 @@ const brandServices = {
     getOneByName: async (name: string) => {
         name = name.toLowerCase()
         try {
-            const brand = await BrandDB.findOne({
+            const category = await CategoryDB.findOne({
                 where: {
-                    name: name,
+                    name,
                     status: true
                 }
             })
-            if (!brand) {
+            if (!category) {
                 return {
                     message: "No record found",
                     status: 404,
                     data: {
-                        brand
+                        category
                     }
                 }
             }
@@ -84,57 +84,57 @@ const brandServices = {
                 message: "Record found",
                 status: 200,
                 data: {
-                    brand
+                    category
                 }
             }
         } catch (error) {
-            console.log("Error in brandServices.getOneByName: " + error)
+            console.log("Error in categoryServices.getOneByName: " + error)
             return {
                 message: "Contact the administrator: error",
                 status: 500
             }
         }
     },
-    create: async (data: Partial<BrandInterface>) => {
+    create: async (data: Partial<CategoryInterface>) => {
+        data.category_code = data.category_code?.toUpperCase()
         data.name = data.name?.toLowerCase()
-        data.brand_code = data.brand_code?.toUpperCase()
         try {
-            const brand = await BrandDB.create({ ...data })
+            const category = await CategoryDB.create({ ...data })
             return {
                 message: "Successful creation",
                 status: 201,
                 data: {
-                    brand
+                    category
                 }
             }
         } catch (error) {
-            console.log("Error in brandServices.create: " + error)
+            console.log("Error in categoryServices.create: " + error)
             return {
                 message: "Contact the administrator: error",
                 status: 500
             }
         }
     },
-    update: async (dataRequest: Partial<BrandInterface>, code: string) => {
-        dataRequest.name = dataRequest.name?.toLocaleLowerCase()
-        delete dataRequest.brand_code
+    update: async (dataRequest: Partial<CategoryInterface>, code: string) => {
+        dataRequest.name = dataRequest.name?.toLowerCase()
+        delete dataRequest.category_code
         code = code.toUpperCase()
         try {
-            await BrandDB.update(dataRequest, {
+            await CategoryDB.update(dataRequest, {
                 where: {
-                    brand_code: code
+                    category_code: code
                 }
             })
-            const { data } = await brandServices.getOne(code)
+            const { data } = await categoryServices.getOne(code)
             return {
                 message: "Successful upgrade",
                 status: 200,
                 data: {
-                    brand: data?.brand
+                    category: data?.category
                 }
             }
         } catch (error) {
-            console.log("Error in brandServices.update: " + error)
+            console.log("Error in categoryServices.update: " + error)
             return {
                 message: "Contact the administrator: error",
                 status: 500
@@ -144,13 +144,13 @@ const brandServices = {
     delete: async (code: string) => {
         code = code.toUpperCase()
         try {
-            await BrandDB.update(
+            await CategoryDB.update(
                 {
                     status: false,
                     deletedAt: new Date()
                 },
                 {
-                    where: { brand_code: code }
+                    where: { category_code: code }
                 }
             )
             return {
@@ -158,7 +158,7 @@ const brandServices = {
                 status: 200,
             }
         } catch (error) {
-            console.log("Error in brandServices.delete: " + error)
+            console.log("Error in categoryServices.delete: " + error)
             return {
                 message: "Contact the administrator: error",
                 status: 500
@@ -168,5 +168,5 @@ const brandServices = {
 }
 
 export {
-    brandServices
+    categoryServices
 }
