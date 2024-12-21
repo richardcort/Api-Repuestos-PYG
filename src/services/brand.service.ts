@@ -29,12 +29,12 @@ const brandServices = {
             }
         }
     },
-    getOne: async (brandCode: string) => {
-        brandCode = brandCode.toUpperCase()
+    getOne: async (code: string) => {
+        code = code.toUpperCase()
         try {
             const brand = await BrandDB.findOne({
                 where: {
-                    brand_code: brandCode,
+                    brand_code: code,
                     status: true
                 }
             })
@@ -118,6 +118,7 @@ const brandServices = {
     update: async (dataRequest: Partial<BrandInterface>, code: string) => {
         dataRequest.name = dataRequest.name?.toLocaleLowerCase()
         delete dataRequest.brand_code
+        code = code.toUpperCase()
         try {
             await BrandDB.update(dataRequest, {
                 where: {
@@ -141,6 +142,7 @@ const brandServices = {
         }
     },
     delete: async (code: string) => {
+        code = code.toUpperCase()
         try {
             await BrandDB.update(
                 {
